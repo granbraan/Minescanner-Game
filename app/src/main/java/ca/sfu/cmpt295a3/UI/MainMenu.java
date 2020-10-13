@@ -38,6 +38,8 @@ public class MainMenu extends AppCompatActivity{
             public void onClick(View view) {
                 //Swap to Options Screen
                 Log.i("Main Menu - Options", "Options Button Clicked");
+                Intent i = Options.makeLaunchIntent(MainMenu.this);
+                startActivityForResult(i, 1);
             }
         });
         findViewById(R.id.menuHelpButton).setOnClickListener(new View.OnClickListener(){
