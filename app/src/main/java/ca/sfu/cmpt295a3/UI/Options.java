@@ -134,6 +134,9 @@ public class Options extends AppCompatActivity{
                 boardText.setText(message);
                 break;
         }
+
+        sharedEditor.putInt("boardSize", boardSizeSeek.getProgress());
+        sharedEditor.commit();
     }
 
     private void setMineText(){
@@ -163,6 +166,8 @@ public class Options extends AppCompatActivity{
                 boardText.setText(message);
                 break;
         }
+        sharedEditor.putInt("numOfMines", numberOfMinesSeek.getProgress());
+        sharedEditor.commit();
     }
 
     @Override
