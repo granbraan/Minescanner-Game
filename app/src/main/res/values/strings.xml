@@ -3,6 +3,7 @@
 
     <!-- Title Screen -->
     <string name="titleScreenText">Title of Application</string>
+    <string name="titleScreenButtonSkip">Skip Intro</string>
 
     <!-- Main Menu Strings -->
     <string name="menuGameStartButton">Start Game</string>
@@ -11,6 +12,10 @@
     <string name="menuTitleText">Title of Application</string>
     <string name="menuBackgroundImageDesc">Background Image for Main Menu</string>
 
-    <!-- To Sort -->
-
+    <!-- Option Strings -->
+    <string name="optionsBoardSizeText">Board Size</string>
+    <string name="optionsNumberOfMinesText">Number of Mines</string>
+    <string name="optionsClearStatsButton">Reset Stats</string>
+    <string name="optionsHighScoreText">High Score</string>
+    <string name="optionsGamesPlayedText">Games Played</string>
 </resources>

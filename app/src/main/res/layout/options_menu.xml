@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/optionsScreen"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/optionsBoardSizeText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:text="@string/optionsBoardSizeText"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <SeekBar
+        android:id="@+id/optionsBoardSizeSeek"
+        style="@style/Widget.AppCompat.SeekBar.Discrete"
+        android:layout_width="247dp"
+        android:layout_height="27dp"
+        android:max="2"
+        android:progress="0"
+        app:layout_constraintStart_toStartOf="@+id/optionsBoardSizeText"
+        app:layout_constraintTop_toBottomOf="@+id/optionsBoardSizeText" />
+
+    <TextView
+        android:id="@+id/optionsNumberOfMinesText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="@string/optionsNumberOfMinesText"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="@+id/optionsBoardSizeText"
+        app:layout_constraintTop_toBottomOf="@+id/optionsBoardSizeSeek" />
+
+    <SeekBar
+        android:id="@+id/optionsNumberOfMinesSeek"
+        style="@style/Widget.AppCompat.SeekBar.Discrete"
+        android:layout_width="247dp"
+        android:layout_height="27dp"
+        android:max="3"
+        android:progress="0"
+        app:layout_constraintStart_toStartOf="@+id/optionsNumberOfMinesText"
+        app:layout_constraintTop_toBottomOf="@+id/optionsNumberOfMinesText" />
+
+    <Button
+        android:id="@+id/optionsClearStatsButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/optionsClearStatsButton"
+        app:layout_constraintStart_toStartOf="@+id/optionsHighScoreText"
+        app:layout_constraintTop_toBottomOf="@+id/optionsHighScoreText" />
+
+    <TextView
+        android:id="@+id/optionsHighScoreText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/optionsHighScoreText"
+        android:textAlignment="viewStart"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="@+id/optionsGamesPlayedText"
+        app:layout_constraintTop_toBottomOf="@+id/optionsGamesPlayedText" />
+
+    <TextView
+        android:id="@+id/optionsGamesPlayedText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="128dp"
+        android:text="@string/optionsGamesPlayedText"
+        android:textAlignment="viewStart"
+        android:textSize="24sp"
+        app:layout_constraintStart_toEndOf="@+id/optionsBoardSizeSeek"
+        app:layout_constraintTop_toTopOf="@+id/optionsBoardSizeSeek" />
+</androidx.constraintlayout.widget.ConstraintLayout>
