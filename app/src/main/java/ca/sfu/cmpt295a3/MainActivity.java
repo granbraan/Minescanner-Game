@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.animation.Animation;
@@ -29,8 +30,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.title_screen);
         skipIntroButton();
         setUpAnimations();
-
-
     }
 
     private void setUpAnimations(){
@@ -42,7 +41,14 @@ public class MainActivity extends AppCompatActivity {
         redBloon.setAnimation(splashBloon);
         dartMonkey.setAnimation(splashMonkey);
 
-
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Intent i = MainMenu.makeLaunchIntent(MainActivity.this);
+                startActivity(i);
+                finish();
+            }
+        }, 12000);
     }
 
     private void skipIntroButton() {
