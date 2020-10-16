@@ -57,7 +57,7 @@ public class Options extends AppCompatActivity{
         int highScore = sharedPref.getInt("highScore", 0);
 
         boardSizeSeek = findViewById(R.id.optionsBoardSizeSeek);
-        numberOfMinesSeek = findViewById(R.id.optionsNumberOfMinesSeek);
+        numberOfMinesSeek = findViewById(R.id.optionsNumberOfBloonsSeek);
 
         /*
             Board Size
@@ -141,7 +141,7 @@ public class Options extends AppCompatActivity{
 
     private void setMineText(){
         int curr = numberOfMinesSeek.getProgress();
-        TextView boardText = findViewById(R.id.optionsNumberOfMinesText);
+        TextView boardText = findViewById(R.id.optionsNumberOfBloonsText);
         String message = "Number of Mines: ";
         switch(curr){
             case 0:

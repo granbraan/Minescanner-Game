@@ -53,7 +53,9 @@ public class MainMenu extends AppCompatActivity{
 
     @Override
     public void onBackPressed(){
+        super.onBackPressed();
         android.os.Process.killProcess(android.os.Process.myPid());
         System.exit(1);
+        Log.e("Main Menu - Back", "This should not print");
     }
 }

@@ -5,7 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import ca.sfu.cmpt295a3.UI.MainMenu;
 
@@ -15,12 +19,30 @@ import ca.sfu.cmpt295a3.UI.MainMenu;
  * Will swap to Main Menu on click or after all animations + 4 seconds
  */
 public class MainActivity extends AppCompatActivity {
+    private Animation splashMonkey, splashBloon;
+    private ImageView dartMonkey, redBloon;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.title_screen);
         skipIntroButton();
+        setUpAnimations();
+
+
+    }
+
+    private void setUpAnimations(){
+        splashMonkey = AnimationUtils.loadAnimation(this, R.anim.splash_dart_monkey);
+        splashBloon = AnimationUtils.loadAnimation(this, R.anim.splash_bloon);
+        redBloon = findViewById(R.id.titleBloon);
+        dartMonkey = findViewById(R.id.titleMonkey);
+
+        redBloon.setAnimation(splashBloon);
+        dartMonkey.setAnimation(splashMonkey);
+
+
     }
 
     private void skipIntroButton() {

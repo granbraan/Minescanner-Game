@@ -1,21 +1,24 @@
 <resources>
-    <string name="app_name">Title of Application</string>
+    <string name="app_name">Find the Bloons</string>
 
     <!-- Title Screen -->
-    <string name="titleScreenText">Title of Application</string>
+    <string name="titleScreenText">Find the Bloons</string>
     <string name="titleScreenButtonSkip">Skip Intro</string>
+    <string name="title_monkey">Dart Monkey</string>
+    <string name="titleBloon">Regrow Red Bloon</string>
 
     <!-- Main Menu Strings -->
     <string name="menuGameStartButton">Start Game</string>
     <string name="menuOptionsButton">Options</string>
     <string name="menuHelpButton">Help</string>
-    <string name="menuTitleText">Title of Application</string>
+    <string name="menuTitleText">Find the Bloons</string>
     <string name="menuBackgroundImageDesc">Background Image for Main Menu</string>
 
     <!-- Option Strings -->
     <string name="optionsBoardSizeText">Board Size</string>
-    <string name="optionsNumberOfMinesText">Number of Mines</string>
+    <string name="optionsNumberOfBloonsText">Number of Balloons</string>
     <string name="optionsClearStatsButton">Reset Stats</string>
     <string name="optionsHighScoreText">High Score</string>
     <string name="optionsGamesPlayedText">Games Played</string>
+
 </resources>

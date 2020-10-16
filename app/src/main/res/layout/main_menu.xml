@@ -10,7 +10,7 @@
         android:id="@+id/menuBackgroundImage"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="#CA1818"
+        android:background="#11DBED"
         android:contentDescription="@string/menuBackgroundImageDesc"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -18,7 +18,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0"
-        tools:srcCompat="@tools:sample/avatars" />
+        tools:srcCompat="@drawable/dart_monkey" />
 
     <Button
         android:id="@+id/menuGameStartButton"
@@ -55,6 +55,7 @@
         android:layout_marginTop="32dp"
         android:text="@string/menuTitleText"
         android:textAlignment="center"
+        android:textColor="#FFFFFF"
         android:textSize="36sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
