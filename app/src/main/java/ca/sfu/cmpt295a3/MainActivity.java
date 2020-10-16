@@ -22,12 +22,16 @@ import ca.sfu.cmpt295a3.UI.MainMenu;
 public class MainActivity extends AppCompatActivity {
     private Animation splashMonkey, splashBloon;
     private ImageView dartMonkey, redBloon;
+    private Intent i;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.title_screen);
+
+        i = MainMenu.makeLaunchIntent(MainActivity.this);
+        
         skipIntroButton();
         setUpAnimations();
     }
@@ -44,8 +48,8 @@ public class MainActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent i = MainMenu.makeLaunchIntent(MainActivity.this);
                 startActivity(i);
+                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                 finish();
             }
         }, 12000);
@@ -56,8 +60,8 @@ public class MainActivity extends AppCompatActivity {
         skipIntro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = MainMenu.makeLaunchIntent(MainActivity.this);
                 startActivity(i);
+                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
             }
         });
     }

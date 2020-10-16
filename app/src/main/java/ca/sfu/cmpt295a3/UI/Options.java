@@ -16,7 +16,7 @@ import ca.sfu.cmpt295a3.R;
 
 public class Options extends AppCompatActivity{
     private SeekBar boardSizeSeek;
-    private SeekBar numberOfMinesSeek;
+    private SeekBar numberOfBloons;
     private SharedPreferences sharedPref;
     private SharedPreferences.Editor sharedEditor;
 
@@ -52,12 +52,12 @@ public class Options extends AppCompatActivity{
 
     private void setUpSeekBar(){
         int boardSize = sharedPref.getInt("boardSize", 0);
-        int numOfMines = sharedPref.getInt("numOfMines", 0);
+        int numOfBloons = sharedPref.getInt("numOfBloons", 0);
         int gamesPlayed = sharedPref.getInt("gamesPlayed", 0);
         int highScore = sharedPref.getInt("highScore", 0);
 
         boardSizeSeek = findViewById(R.id.optionsBoardSizeSeek);
-        numberOfMinesSeek = findViewById(R.id.optionsNumberOfBloonsSeek);
+        numberOfBloons = findViewById(R.id.optionsNumberOfBloonsSeek);
 
         /*
             Board Size
@@ -71,7 +71,7 @@ public class Options extends AppCompatActivity{
                 3 = 20
         */
         boardSizeSeek.setProgress(boardSize);
-        numberOfMinesSeek.setProgress(numOfMines);
+        numberOfBloons.setProgress(numOfBloons);
 
         setBoardText();
         setMineText();
@@ -95,7 +95,7 @@ public class Options extends AppCompatActivity{
             }
         });
 
-        numberOfMinesSeek.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener(){
+        numberOfBloons.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener(){
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b){
                 setMineText();
@@ -140,9 +140,9 @@ public class Options extends AppCompatActivity{
     }
 
     private void setMineText(){
-        int curr = numberOfMinesSeek.getProgress();
+        int curr = numberOfBloons.getProgress();
         TextView boardText = findViewById(R.id.optionsNumberOfBloonsText);
-        String message = "Number of Mines: ";
+        String message = "Number of Bloons: ";
         switch(curr){
             case 0:
                 message += "6";
@@ -161,20 +161,17 @@ public class Options extends AppCompatActivity{
                 boardText.setText(message);
                 break;
             default:
-                numberOfMinesSeek.setProgress(0);
+                numberOfBloons.setProgress(0);
                 message += "6";
                 boardText.setText(message);
                 break;
         }
-        sharedEditor.putInt("numOfMines", numberOfMinesSeek.getProgress());
+        sharedEditor.putInt("numOfBloons", numberOfBloons.getProgress());
         sharedEditor.commit();
     }
 
     @Override
     public void onBackPressed(){
-        sharedEditor.putInt("boardSize", boardSizeSeek.getProgress());
-        sharedEditor.putInt("numOfMines", numberOfMinesSeek.getProgress());
-        sharedEditor.commit();
         finish();
     }
 }

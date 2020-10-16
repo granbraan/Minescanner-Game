@@ -21,7 +21,6 @@ public class MainMenu extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_menu);
-
         setUpButtons();
     }
 
@@ -31,6 +30,7 @@ public class MainMenu extends AppCompatActivity{
             public void onClick(View view) {
                 //Swap to Game Screen
                 Log.i("Main Menu - Start Game", "Start Game Button Clicked");
+                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
             }
         });
         findViewById(R.id.menuOptionsButton).setOnClickListener(new View.OnClickListener(){
@@ -40,6 +40,7 @@ public class MainMenu extends AppCompatActivity{
                 Log.i("Main Menu - Options", "Options Button Clicked");
                 Intent i = Options.makeLaunchIntent(MainMenu.this);
                 startActivityForResult(i, 1);
+                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
             }
         });
         findViewById(R.id.menuHelpButton).setOnClickListener(new View.OnClickListener(){
@@ -47,6 +48,7 @@ public class MainMenu extends AppCompatActivity{
             public void onClick(View view) {
                 //Swap to Help Screen
                 Log.i("Main Menu - Help", "Help Button Clicked");
+                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
             }
         });
     }
