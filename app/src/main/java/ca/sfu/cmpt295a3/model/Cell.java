@@ -3,14 +3,16 @@ package ca.sfu.cmpt295a3.model;
 public class Cell {
     private int row;
     private int col;
-    private int isMine;
-    private int isReveal;
+    private boolean isMine;
+    private boolean isReveal;
+    private boolean isScanned;
 
-    public Cell(int row, int col, int isMine, int isReveal) {
+    public Cell(int row, int col, boolean isMine, boolean isReveal, boolean isScanned) {
         this.row = row;
         this.col = col;
         this.isMine = isMine;
         this.isReveal = isReveal;
+        this.isScanned = isScanned;
     }
 
     public int getRow() {
@@ -29,19 +31,27 @@ public class Cell {
         this.col = col;
     }
 
-    public int getIsMine() {
+    public boolean isMine() {
         return isMine;
     }
 
-    public void setIsMine(int isMine) {
-        this.isMine = isMine;
+    public void setMine(boolean mine) {
+        isMine = mine;
     }
 
-    public int getIsReveal() {
+    public boolean isReveal() {
         return isReveal;
     }
 
-    public void setIsReveal(int isReveal) {
-        this.isReveal = isReveal;
+    public void setReveal(boolean reveal) {
+        isReveal = reveal;
+    }
+
+    public boolean isScanned() {
+        return isScanned;
+    }
+
+    public void setScanned(boolean scanned) {
+        isScanned = scanned;
     }
 }
