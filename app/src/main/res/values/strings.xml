@@ -6,6 +6,7 @@
     <string name="titleScreenButtonSkip">Skip Intro</string>
     <string name="title_monkey">Dart Monkey</string>
     <string name="titleBloon">Regrow Red Bloon</string>
+    <string name="titleAuthors"><![CDATA[Granton Lo & Colin Yuen]]></string>
 
     <!-- Main Menu Strings -->
     <string name="menuGameStartButton">Start Game</string>
