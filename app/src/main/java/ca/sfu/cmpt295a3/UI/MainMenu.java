@@ -2,6 +2,7 @@ package ca.sfu.cmpt295a3.UI;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -11,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import ca.sfu.cmpt295a3.R;
 
 public class MainMenu extends AppCompatActivity{
+
     public static Intent makeLaunchIntent(Context c){
         return new Intent(c,MainMenu.class);
     }
@@ -28,6 +30,14 @@ public class MainMenu extends AppCompatActivity{
             public void onClick(View view) {
                 //Swap to Game Screen
                 Log.i("Main Menu - Start Game", "Start Game Button Clicked");
+
+                SharedPreferences sharedPref = getSharedPreferences("SaveFile", MODE_PRIVATE);
+                SharedPreferences.Editor sharedEditor = sharedPref.edit();
+                int curr = sharedPref.getInt("gamesPlayed", 0);
+                curr += 1;
+                sharedEditor.putInt("gamesPlayed", curr);
+                sharedEditor.apply();
+
                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
             }
         });
