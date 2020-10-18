@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/HelpScreen"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/helpInstructions"
+        android:layout_width="500dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/helpInstructions"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="@+id/helpTitle"
+        app:layout_constraintTop_toBottomOf="@+id/helpTitle" />
+
+    <TextView
+        android:id="@+id/helpTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/helpTitle"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/helpCredits"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:autoLink="web"
+        android:linksClickable="true"
+        android:text="@string/helpCredits"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/helpInstructions" />
+
+    <ImageView
+        android:id="@+id/helpRedBloon"
+        android:layout_width="96dp"
+        android:layout_height="96dp"
+        android:layout_marginStart="8dp"
+        android:contentDescription="@string/helpRedBloonDesc"
+        app:layout_constraintBottom_toBottomOf="@+id/helpInstructions"
+        app:layout_constraintStart_toEndOf="@+id/helpInstructions"
+        app:layout_constraintTop_toTopOf="@+id/helpInstructions"
+        app:srcCompat="@drawable/regrow_red" />
+
+    <TextView
+        android:id="@+id/helpCreditText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="@+id/helpCredits"
+        app:layout_constraintTop_toBottomOf="@+id/helpCredits" />
+</androidx.constraintlayout.widget.ConstraintLayout>

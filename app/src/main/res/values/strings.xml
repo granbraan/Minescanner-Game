@@ -1,21 +1,31 @@
 <resources>
-    <string name="app_name">Title of Application</string>
+    <string name="app_name">Find the Bloons</string>
 
     <!-- Title Screen -->
-    <string name="titleScreenText">Title of Application</string>
+    <string name="titleScreenText">Find the Bloons</string>
     <string name="titleScreenButtonSkip">Skip Intro</string>
+    <string name="title_monkey">Dart Monkey</string>
+    <string name="titleBloon">Regrow Red Bloon</string>
+    <string name="titleAuthors"><![CDATA[Granton Lo & Colin Yuen]]></string>
 
     <!-- Main Menu Strings -->
     <string name="menuGameStartButton">Start Game</string>
     <string name="menuOptionsButton">Options</string>
     <string name="menuHelpButton">Help</string>
-    <string name="menuTitleText">Title of Application</string>
-    <string name="menuBackgroundImageDesc">Background Image for Main Menu</string>
+    <string name="menuTitleText">Find the Bloons</string>
+    <string name="menuImageDesc">Menu Screen Dart Monkey</string>
 
     <!-- Option Strings -->
     <string name="optionsBoardSizeText">Board Size</string>
-    <string name="optionsNumberOfMinesText">Number of Mines</string>
+    <string name="optionsNumberOfBloonsText">Number of Balloons</string>
     <string name="optionsClearStatsButton">Reset Stats</string>
     <string name="optionsHighScoreText">High Score</string>
     <string name="optionsGamesPlayedText">Games Played</string>
+
+    <!-- Help Strings -->
+    <string name="helpInstructions">\tFind the Bloon is a game where you, the player tries to find a certain number of Bloons which are hidden in the cells on the game board. Tapping on a cell allows the player to inspect it. If there was a hidden Bloon, it will be revealed, otherwise a scan, which reveals the number of unrevealed Bloons on the same row and column will be shown on that cell. The goal of the game is to reveal all the Bloons on the game board.</string>
+    <string name="helpTitle">Instructions</string>
+    <string name="helpRedBloonDesc">Picture of Red Bloon</string>
+    <string name="helpCredits">Credits</string>
+
 </resources>
