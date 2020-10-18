@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="ca.sfu.cmpt295a3">
+    <uses-permission android:name="android.permission.GET_TASKS"/>
 
     <application
         android:allowBackup="true"
@@ -16,23 +17,25 @@
             android:screenOrientation="landscape">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name=".UI.MainMenu"
             android:configChanges="keyboard|orientation|keyboardHidden|screenSize"
-            android:screenOrientation="landscape">
-        </activity>
+            android:screenOrientation="landscape"></activity>
         <activity
             android:name=".UI.Options"
             android:configChanges="keyboard|orientation|keyboardHidden|screenSize"
-            android:screenOrientation="landscape">
-        </activity>
-        <activity android:name=".UI.HelpScreen"
+            android:screenOrientation="landscape"></activity>
+        <activity
+            android:name=".UI.HelpScreen"
             android:configChanges="keyboard|orientation|keyboardHidden|screenSize"
-            android:screenOrientation="landscape">
-        </activity>
+            android:screenOrientation="landscape"></activity>
+        <activity android:name=".UI.VictoryScreen"
+            android:configChanges="keyboard|orientation|keyboardHidden|screenSize"
+            android:screenOrientation="landscape"></activity>
     </application>
 
 </manifest>

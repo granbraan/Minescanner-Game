@@ -1,9 +1,12 @@
 package ca.sfu.cmpt295a3.UI;
 
 import android.annotation.SuppressLint;
+import android.app.ActivityManager;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -12,9 +15,12 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.List;
+
 import ca.sfu.cmpt295a3.R;
 
 public class Options extends AppCompatActivity{
+    private MediaPlayer myPlayer;
     private SeekBar boardSizeSeek;
     private SeekBar numberOfBloons;
     private SharedPreferences sharedPref;
@@ -173,6 +179,20 @@ public class Options extends AppCompatActivity{
     @Override
     public void onBackPressed(){
         finish();
+    }
+
+    @Override
+    protected void onPause() {
+        Context context = getApplicationContext();
+        ActivityManager am = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+        List<ActivityManager.RunningTaskInfo> taskInfo = am.getRunningTasks(1);
+        if (!taskInfo.isEmpty()) {
+            ComponentName topActivity = taskInfo.get(0).topActivity;
+            if (!topActivity.getPackageName().equals(context.getPackageName())) {
+                myPlayer.stop();
+            }
+        }
+        super.onPause();
     }
 }
 

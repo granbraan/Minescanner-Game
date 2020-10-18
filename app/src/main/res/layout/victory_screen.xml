@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".UI.VictoryScreen">
+
+    <TextView
+        android:id="@+id/victoryTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="Congratulations!"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/victoryText"
+        android:layout_width="256dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="56dp"
+        android:text="You helped the Monkeys find all the Bloons! Victory!"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/victoryTitle" />
+
+    <Button
+        android:id="@+id/victoryButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="Return to Menu"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/victoryText" />
+
+    <ImageView
+        android:id="@+id/victoryLeftImage"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:hapticFeedbackEnabled="false"
+        android:scaleX="-1"
+        app:layout_constraintEnd_toStartOf="@+id/victoryText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/victoryText"
+        app:srcCompat="@drawable/dart_monkey"
+        />
+
+    <ImageView
+        android:id="@+id/victoryRightImage"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:scaleY="1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/victoryText"
+        app:layout_constraintTop_toTopOf="@+id/victoryText"
+        app:srcCompat="@drawable/dart_monkey" />
+</androidx.constraintlayout.widget.ConstraintLayout>
