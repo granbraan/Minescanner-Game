@@ -13,7 +13,7 @@
     <string name="menuOptionsButton">Options</string>
     <string name="menuHelpButton">Help</string>
     <string name="menuTitleText">Find the Bloons</string>
-    <string name="menuBackgroundImageDesc">Background Image for Main Menu</string>
+    <string name="menuImageDesc">Menu Screen Dart Monkey</string>
 
     <!-- Option Strings -->
     <string name="optionsBoardSizeText">Board Size</string>
@@ -21,5 +21,11 @@
     <string name="optionsClearStatsButton">Reset Stats</string>
     <string name="optionsHighScoreText">High Score</string>
     <string name="optionsGamesPlayedText">Games Played</string>
+
+    <!-- Help Strings -->
+    <string name="helpInstructions">\tFind the Bloon is a game where you, the player tries to find a certain number of Bloons which are hidden in the cells on the game board. Tapping on a cell allows the player to inspect it. If there was a hidden Bloon, it will be revealed, otherwise a scan, which reveals the number of unrevealed Bloons on the same row and column will be shown on that cell. The goal of the game is to reveal all the Bloons on the game board.</string>
+    <string name="helpTitle">Instructions</string>
+    <string name="helpRedBloonDesc">Picture of Red Bloon</string>
+    <string name="helpCredits">Credits</string>
 
 </resources>

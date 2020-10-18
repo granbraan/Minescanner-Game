@@ -1,11 +1,9 @@
 package ca.sfu.cmpt295a3.UI;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.MenuItem;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -48,6 +46,8 @@ public class MainMenu extends AppCompatActivity{
             public void onClick(View view) {
                 //Swap to Help Screen
                 Log.i("Main Menu - Help", "Help Button Clicked");
+                Intent i = HelpScreen.makeLaunchIntent(MainMenu.this);
+                startActivityForResult(i, 1);
                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
             }
         });

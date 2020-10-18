@@ -23,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
     private Animation splashMonkey, splashBloon;
     private ImageView dartMonkey, redBloon;
     private Intent i;
+    private Handler animSkip;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.title_screen);
 
         i = MainMenu.makeLaunchIntent(MainActivity.this);
-        
+
         skipIntroButton();
         setUpAnimations();
     }
@@ -45,7 +46,8 @@ public class MainActivity extends AppCompatActivity {
         redBloon.setAnimation(splashBloon);
         dartMonkey.setAnimation(splashMonkey);
 
-        new Handler().postDelayed(new Runnable() {
+        animSkip = new Handler();
+        animSkip.postDelayed(new Runnable() {
             @Override
             public void run() {
                 startActivity(i);
@@ -60,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
         skipIntro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                animSkip.removeCallbacksAndMessages(null);
                 startActivity(i);
                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
             }

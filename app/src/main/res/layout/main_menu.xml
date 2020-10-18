@@ -6,59 +6,59 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/menuBackgroundImage"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:background="#11DBED"
-        android:contentDescription="@string/menuBackgroundImageDesc"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0"
-        tools:srcCompat="@drawable/dart_monkey" />
-
     <Button
         android:id="@+id/menuGameStartButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="128dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
         android:text="@string/menuGameStartButton"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/menuOptionsButton" />
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="@+id/menuTitleText"
+        app:layout_constraintTop_toBottomOf="@+id/menuTitleText" />
 
     <Button
         android:id="@+id/menuOptionsButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="32dp"
+        android:layout_marginTop="8dp"
         android:text="@string/menuOptionsButton"
-        app:layout_constraintBottom_toBottomOf="@+id/menuBackgroundImage"
-        app:layout_constraintEnd_toStartOf="@+id/menuHelpButton"
-        app:layout_constraintStart_toEndOf="@+id/menuGameStartButton" />
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="@+id/menuGameStartButton"
+        app:layout_constraintTop_toBottomOf="@+id/menuGameStartButton" />
 
     <Button
         android:id="@+id/menuHelpButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="128dp"
+        android:layout_marginTop="8dp"
         android:text="@string/menuHelpButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/menuOptionsButton" />
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="@+id/menuOptionsButton"
+        app:layout_constraintTop_toBottomOf="@+id/menuOptionsButton" />
 
     <TextView
         android:id="@+id/menuTitleText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
         android:text="@string/menuTitleText"
         android:textAlignment="center"
-        android:textColor="#FFFFFF"
+        android:textColor="#000000"
         android:textSize="36sp"
         android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/menuImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/menuImageDesc"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/menuBackgroundImage"
-        app:layout_constraintTop_toTopOf="@+id/menuBackgroundImage" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/dart_monkey" />
 </androidx.constraintlayout.widget.ConstraintLayout>

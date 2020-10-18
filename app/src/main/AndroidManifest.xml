@@ -4,47 +4,34 @@
 
     <application
         android:allowBackup="true"
+        android:fullBackupContent="@xml/backup_descriptor"
         android:icon="@mipmap/ic_launcher"
-
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-        android:fullBackupContent="@xml/backup_descriptor">
+        android:theme="@style/AppTheme">
 
         <activity
             android:name=".MainActivity"
-            android:screenOrientation="landscape"
             android:configChanges="keyboard|orientation|keyboardHidden|screenSize"
-            >
+            android:screenOrientation="landscape">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".UI.MainMenu"
-            android:screenOrientation="landscape"
             android:configChanges="keyboard|orientation|keyboardHidden|screenSize"
-            >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            android:screenOrientation="landscape">
         </activity>
-
         <activity
             android:name=".UI.Options"
-            android:screenOrientation="landscape"
             android:configChanges="keyboard|orientation|keyboardHidden|screenSize"
-            >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            android:screenOrientation="landscape">
+        </activity>
+        <activity android:name=".UI.HelpScreen"
+            android:configChanges="keyboard|orientation|keyboardHidden|screenSize"
+            android:screenOrientation="landscape">
         </activity>
     </application>
 
