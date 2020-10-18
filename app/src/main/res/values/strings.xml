@@ -32,4 +32,12 @@
     <string name="helpCredits">Credits</string>
     <string name="picture_of_bloon">Picture of Bloon</string>
 
+    <!-- Victory Strings -->
+    <string name="victoryTitle">Congratulations!</string>
+    <string name="victoryText">You helped the Monkeys find all the Bloons!</string>
+    <string name="victoryButton">Return to Menu</string>
+    <string name="victoryLeftImage">Dart Monkey Facing Right</string>
+    <string name="victoryRightImage">Dart Monkey Facing Left</string>
+    <string name="victoryScoreCount">Finished in X Scans</string>
+
 </resources>
