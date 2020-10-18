@@ -143,36 +143,30 @@ public class Options extends AppCompatActivity{
         int curr = numberOfBloons.getProgress();
         TextView boardText = findViewById(R.id.optionsNumberOfBloonsText);
         String message = "Number of Bloons: ";
-        int numSet;
         switch(curr){
             case 0:
-                numSet = 6;
                 message += "6";
                 boardText.setText(message);
                 break;
             case 1:
-                numSet = 10;
                 message += "10";
                 boardText.setText(message);
                 break;
             case 2:
-                numSet = 15;
                 message += "15";
                 boardText.setText(message);
                 break;
             case 3:
-                numSet = 20;
                 message += "20";
                 boardText.setText(message);
                 break;
             default:
-                numSet = 6;
                 numberOfBloons.setProgress(0);
                 message += "6";
                 boardText.setText(message);
                 break;
         }
-        sharedEditor.putInt("numOfBloons", numSet);
+        sharedEditor.putInt("numOfBloons", 0);
         sharedEditor.apply();
     }
 
