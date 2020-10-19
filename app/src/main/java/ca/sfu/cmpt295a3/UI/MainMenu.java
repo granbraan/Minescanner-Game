@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.List;
 
+import ca.sfu.cmpt295a3.MainActivity;
 import ca.sfu.cmpt295a3.R;
 
 public class MainMenu extends AppCompatActivity{
@@ -27,6 +28,8 @@ public class MainMenu extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_menu);
+        myPlayer = MainActivity.getPlayer();
+
         setUpButtons();
     }
 
@@ -85,9 +88,17 @@ public class MainMenu extends AppCompatActivity{
         if (!taskInfo.isEmpty()) {
             ComponentName topActivity = taskInfo.get(0).topActivity;
             if (!topActivity.getPackageName().equals(context.getPackageName())) {
-                myPlayer.stop();
+                if(myPlayer != null){
+                    myPlayer.pause();
+                }
             }
         }
         super.onPause();
+    }
+
+    @Override
+    protected void onResume() {
+        myPlayer.start();
+        super.onResume();
     }
 }

@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import java.util.List;
 
+import ca.sfu.cmpt295a3.MainActivity;
 import ca.sfu.cmpt295a3.R;
 import ca.sfu.cmpt295a3.model.GameLogic;
 
@@ -28,6 +29,7 @@ public class VictoryScreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.victory_screen);
+        myPlayer = MainActivity.getPlayer();
 
         setUpText();
         setUpButton();
@@ -63,9 +65,17 @@ public class VictoryScreen extends AppCompatActivity {
         if (!taskInfo.isEmpty()) {
             ComponentName topActivity = taskInfo.get(0).topActivity;
             if (!topActivity.getPackageName().equals(context.getPackageName())) {
-                myPlayer.stop();
+                if(myPlayer != null){
+                    myPlayer.pause();
+                }
             }
         }
         super.onPause();
+    }
+
+    @Override
+    protected void onResume() {
+        myPlayer.start();
+        super.onResume();
     }
 }

@@ -28,9 +28,13 @@ import ca.sfu.cmpt295a3.UI.MainMenu;
 public class MainActivity extends AppCompatActivity {
     private Animation splashMonkey, splashBloon;
     private ImageView dartMonkey, redBloon;
-    private MediaPlayer myPlayer;
+    private static MediaPlayer myPlayer;
     private Intent i;
     private Handler animSkip;
+
+    public static MediaPlayer getPlayer(){
+        return myPlayer;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,7 +102,9 @@ public class MainActivity extends AppCompatActivity {
         if (!taskInfo.isEmpty()) {
             ComponentName topActivity = taskInfo.get(0).topActivity;
             if (!topActivity.getPackageName().equals(context.getPackageName())) {
-                myPlayer.stop();
+                if(myPlayer != null){
+                    myPlayer.pause();
+                }
             }
         }
         super.onPause();

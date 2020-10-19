@@ -17,6 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.List;
 
+import ca.sfu.cmpt295a3.MainActivity;
 import ca.sfu.cmpt295a3.R;
 
 public class Options extends AppCompatActivity{
@@ -35,6 +36,7 @@ public class Options extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.options_menu);
+        myPlayer = MainActivity.getPlayer();
 
         sharedPref = getSharedPreferences("SaveFile", MODE_PRIVATE);
         sharedEditor = sharedPref.edit();
@@ -52,6 +54,11 @@ public class Options extends AppCompatActivity{
                 sharedEditor.remove("gamesPlayed");
                 sharedEditor.remove("highScore");
                 sharedEditor.apply();
+
+                String totalGames = "Games Played: " + 0;
+                String playerHigh = "High Score: " + 0;
+                ((TextView)findViewById(R.id.optionsGamesPlayedText)).setText(totalGames);
+                ((TextView)findViewById(R.id.optionsHighScoreText)).setText(playerHigh);
             }
         });
     }
@@ -189,10 +196,18 @@ public class Options extends AppCompatActivity{
         if (!taskInfo.isEmpty()) {
             ComponentName topActivity = taskInfo.get(0).topActivity;
             if (!topActivity.getPackageName().equals(context.getPackageName())) {
-                myPlayer.stop();
+                if(myPlayer != null){
+                    myPlayer.pause();
+                }
             }
         }
         super.onPause();
+    }
+
+    @Override
+    protected void onResume() {
+        myPlayer.start();
+        super.onResume();
     }
 }
 

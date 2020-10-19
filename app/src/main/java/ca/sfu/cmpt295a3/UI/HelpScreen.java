@@ -8,12 +8,15 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
+import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.List;
 
+import ca.sfu.cmpt295a3.MainActivity;
 import ca.sfu.cmpt295a3.R;
 
 public class HelpScreen extends AppCompatActivity {
@@ -26,6 +29,7 @@ public class HelpScreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.help_screen);
+        myPlayer = MainActivity.getPlayer();
 
         setUpHyperlinks();
     }
@@ -46,9 +50,17 @@ public class HelpScreen extends AppCompatActivity {
         if (!taskInfo.isEmpty()) {
             ComponentName topActivity = taskInfo.get(0).topActivity;
             if (!topActivity.getPackageName().equals(context.getPackageName())) {
-                myPlayer.stop();
+                if(myPlayer != null){
+                    myPlayer.pause();
+                }
             }
         }
         super.onPause();
+    }
+
+    @Override
+    protected void onResume() {
+        myPlayer.start();
+        super.onResume();
     }
 }
