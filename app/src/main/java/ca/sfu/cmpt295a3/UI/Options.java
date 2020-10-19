@@ -77,7 +77,7 @@ public class Options extends AppCompatActivity{
                 0 = 4x6
                 1 = 5x10
                 2 = 6x15
-            Number of Mines
+            Number of Bloons
                 0 =  6
                 1 = 10
                 2 = 15
@@ -87,7 +87,7 @@ public class Options extends AppCompatActivity{
         numberOfBloons.setProgress(numOfBloons);
 
         setBoardText();
-        setMineText();
+        setBloonText();
         String totalGames = "Games Played: " + gamesPlayed;
         String playerHigh = "High Score: " + highScore;
         ((TextView)findViewById(R.id.optionsGamesPlayedText)).setText(totalGames);
@@ -111,7 +111,7 @@ public class Options extends AppCompatActivity{
         numberOfBloons.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener(){
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b){
-                setMineText();
+                setBloonText();
             }
 
             @Override
@@ -152,7 +152,7 @@ public class Options extends AppCompatActivity{
         sharedEditor.apply();
     }
 
-    private void setMineText(){
+    private void setBloonText(){
         int curr = numberOfBloons.getProgress();
         TextView boardText = findViewById(R.id.optionsNumberOfBloonsText);
         String message = "Number of Bloons: ";
