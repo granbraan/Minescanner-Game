@@ -85,9 +85,10 @@ public class Game extends AppCompatActivity {
     }
 
     private void gridButtonClicked(int col, int row) {
+        Toast.makeText(this, "Button clicked: " + col + "," + row, Toast.LENGTH_SHORT);
         Button button = buttons[row][col];
         int curButton = row * NUM_COLS + col;
-        scans++;
+
         //Lock button size
         lockButtonSizes();
 
@@ -95,6 +96,7 @@ public class Game extends AppCompatActivity {
         //Only works in jellybean
         if(grid.getCell(curButton).isMine()) {
             bloonsFound++;
+            grid.getCell(curButton).setReveal(true);
             int newWidth = button.getWidth();
             int newHeight = button.getHeight();
             Bitmap originalBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.regrow_red);
@@ -103,20 +105,21 @@ public class Game extends AppCompatActivity {
             button.setBackground(new BitmapDrawable(resource,scaledBitmap));
 
             GameLogic.updateScan(grid.getCell(curButton));
-
-            //Clicks on shown mine
-            if(!grid.getCell(curButton).isReveal() && !grid.getCell(curButton).isScanned()) {
-                button.setText("" +GameLogic.getScansUsed());
+            //Clicks on revealed mine
+            if(!grid.getCell(curButton).isScanned()) {
+                GameLogic.scan(grid.getCell(curButton));
+                button.setText(GameLogic.getScansUsed());
                 grid.getCell(curButton).setScanned(true);
-                grid.getCell(curButton).setReveal(true);
+                scans++;
             }
         }
         else if(!grid.getCell(curButton).isScanned()) { // Not bloon button
             GameLogic.scan(grid.getCell(curButton));
+            button.setText(GameLogic.getScansUsed());
             grid.getCell(curButton).setScanned(true);
-            button.setText("" + GameLogic.getScansUsed());
+            scans++;
         }
-        showTextCount();
+
     }
 
     private void lockButtonSizes() {
@@ -140,8 +143,8 @@ public class Game extends AppCompatActivity {
         TextView bloons = findViewById(R.id.bloonCount);
         bloons.setText("Bloons found: " + bloonsFound + "/" + savedData.get(2));
 
-        TextView scans2 = findViewById(R.id.scanCount);
-        scans2.setText("Scans used: " + scans);
+        TextView scans = findViewById(R.id.scanCount);
+        scans.setText("Scans used: " + scans);
 
     }
 }
