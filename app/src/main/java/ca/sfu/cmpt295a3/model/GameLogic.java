@@ -44,10 +44,10 @@ public class GameLogic {
     }
 
     public static void scan(Cell cell) {
+        int scannedMines = 0;
         for(int i = 0; i < grid.size(); i++) {
                 if(grid.getCell(i).getCol() == cell.getCol() || (grid.getCell(i).getRow() == cell.getRow())) {
-                    if(grid.getCell(i).isMine() && !grid.getCell(i).isScanned()) {
-                        int scannedMines = getScansUsed();
+                    if(grid.getCell(i).isMine() && !grid.getCell(i).isReveal()) {
                         scannedMines++;
                         setScansUsed(scannedMines);
                     }
@@ -56,9 +56,9 @@ public class GameLogic {
     }
     //decrease scan count when mine is found
     public static void updateScan(Cell cell) {
+        int scannedMines = 0;
         for(int i = 0; i < grid.size(); i++) {
                 if((grid.getCell(i).getCol() == cell.getCol() || (grid.getCell(i).getRow() == cell.getRow())) && !cell.isScanned()) {
-                    int scannedMines = getScansUsed();
                     scannedMines++;
                     setScansUsed(scannedMines);
                 }
