@@ -44,25 +44,25 @@ public class GameLogic {
     }
 
     public static void scan(Cell cell) {
-        if( (cell.isMine() && cell.isReveal()) || (!cell.isMine() && !cell.isReveal()) ) {
-            for(int i = 0; i < grid.size(); i++) {
+        for(int i = 0; i < grid.size(); i++) {
                 if(grid.getCell(i).getCol() == cell.getCol() || (grid.getCell(i).getRow() == cell.getRow())) {
-                    minesRevealed = scansUsed;
-                    scansUsed = ++minesRevealed;
+                    if(grid.getCell(i).isMine() && !grid.getCell(i).isScanned()) {
+                        int scannedMines = getScansUsed();
+                        scannedMines++;
+                        setScansUsed(scannedMines);
+                    }
                 }
             }
-        }
     }
-
+    //decrease scan count when mine is found
     public static void updateScan(Cell cell) {
-        if( (cell.isMine() && cell.isReveal()) || (!cell.isMine() && !cell.isReveal()) ) {
-            for(int i = 0; i < grid.size(); i++) {
-                if((grid.getCell(i).getCol() == cell.getCol() || (grid.getCell(i).getRow() == cell.getRow())) && !cell.isReveal()) {
-                    minesRevealed = scansUsed;
-                    scansUsed = --minesRevealed;
+        for(int i = 0; i < grid.size(); i++) {
+                if((grid.getCell(i).getCol() == cell.getCol() || (grid.getCell(i).getRow() == cell.getRow())) && !cell.isScanned()) {
+                    int scannedMines = getScansUsed();
+                    scannedMines++;
+                    setScansUsed(scannedMines);
                 }
             }
-        }
     }
 
 

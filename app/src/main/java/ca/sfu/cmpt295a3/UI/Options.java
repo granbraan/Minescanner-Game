@@ -13,12 +13,14 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import ca.sfu.cmpt295a3.R;
+import ca.sfu.cmpt295a3.model.Data;
 
 public class Options extends AppCompatActivity{
     private SeekBar boardSizeSeek;
     private SeekBar numberOfBloons;
     private SharedPreferences sharedPref;
     private SharedPreferences.Editor sharedEditor;
+    private Data savedData = Data.getInstance();
 
     public static Intent makeLaunchIntent(Context c){
         return new Intent(c, Options.class);
@@ -119,18 +121,26 @@ public class Options extends AppCompatActivity{
             case 0:
                 message += "4x6";
                 boardText.setText(message);
+                savedData.add(0,4); // rows
+                savedData.add(1,6); // cols
                 break;
             case 1:
                 message += "5x10";
+                savedData.add(0,5); // rows
+                savedData.add(1,10); // cols
                 boardText.setText(message);
                 break;
             case 2:
                 message += "6x15";
+                savedData.add(0,6); // rows
+                savedData.add(1,15); // cols
                 boardText.setText(message);
                 break;
             default:
                 boardSizeSeek.setProgress(0);
                 message += "4x6";
+                savedData.add(0,4); // rows
+                savedData.add(1,6); // cols
                 boardText.setText(message);
                 break;
         }
@@ -146,23 +156,28 @@ public class Options extends AppCompatActivity{
         switch(curr){
             case 0:
                 message += "6";
+                savedData.add(2,6);
                 boardText.setText(message);
                 break;
             case 1:
                 message += "10";
+                savedData.add(2,10);
                 boardText.setText(message);
                 break;
             case 2:
                 message += "15";
+                savedData.add(2,15);
                 boardText.setText(message);
                 break;
             case 3:
                 message += "20";
+                savedData.add(2,20);
                 boardText.setText(message);
                 break;
             default:
                 numberOfBloons.setProgress(0);
                 message += "6";
+                savedData.add(2,6);
                 boardText.setText(message);
                 break;
         }
