@@ -26,7 +26,7 @@ public class GameLogic {
     public static void createGame(int col, int row, int mines) {
         for (int i = 0; i < col; i++) {
             for (int j = 0; j < row; j++) {
-                grid.addCell(new Cell(row, col, false, false, false));
+                grid.addCell(new Cell(j, i, false, false, false,0));
             }
         }
 
@@ -49,21 +49,21 @@ public class GameLogic {
                 if(grid.getCell(i).getCol() == cell.getCol() || (grid.getCell(i).getRow() == cell.getRow())) {
                     if(grid.getCell(i).isMine() && !grid.getCell(i).isReveal()) {
                         scannedMines++;
-                        setScansUsed(scannedMines);
                     }
                 }
             }
+        cell.setScanCounter(scannedMines);
     }
     //decrease scan count when mine is found
-    public static void updateScan(Cell cell) {
-        int scannedMines = 0;
+    public static void  updateScan(Cell cell) {
         for(int i = 0; i < grid.size(); i++) {
-                if((grid.getCell(i).getCol() == cell.getCol() || (grid.getCell(i).getRow() == cell.getRow())) && !cell.isScanned()) {
-                    scannedMines++;
-                    setScansUsed(scannedMines);
-                }
+            if(grid.getCell(i).isScanned()) {
+                scan(cell);
             }
+        }
     }
+
+
 
 
 }

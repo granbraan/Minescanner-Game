@@ -45,6 +45,7 @@ public class Game extends AppCompatActivity {
 
         populateButtons();
         showTextCount();
+        grid.restartGrid();
         GameLogic.createGame(NUM_ROWS,NUM_COLS, savedData.get(2));
     }
 
@@ -87,14 +88,12 @@ public class Game extends AppCompatActivity {
     private void gridButtonClicked(int col, int row) {
         Button button = buttons[row][col];
         int curButton = row * NUM_COLS + col;
-        scans++;
         //Lock button size
         lockButtonSizes();
 
         //Scale image to button
         //Only works in jellybean
         if(grid.getCell(curButton).isMine()) {
-            bloonsFound++;
             int newWidth = button.getWidth();
             int newHeight = button.getHeight();
             Bitmap originalBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.regrow_red);
@@ -102,21 +101,36 @@ public class Game extends AppCompatActivity {
             Resources resource = getResources();
             button.setBackground(new BitmapDrawable(resource,scaledBitmap));
 
-            GameLogic.updateScan(grid.getCell(curButton));
+            //board refresher
+            updateScanCount();
 
-            //Clicks on shown mine
-            if(!grid.getCell(curButton).isReveal() && !grid.getCell(curButton).isScanned()) {
-                button.setText("" +GameLogic.getScansUsed());
-                grid.getCell(curButton).setScanned(true);
+            //updates bloon count
+            if(!grid.getCell(curButton).isReveal()) {
+                bloonsFound++;
                 grid.getCell(curButton).setReveal(true);
+                grid.getCell(curButton).setScanned(true);
+            }
+            //Clicks on shown mine to scan
+            else if(grid.getCell(curButton).isReveal() && grid.getCell(curButton).isScanned()) {
+                GameLogic.scan(grid.getCell(curButton));
+                button.setText("" + grid.getCell(curButton).getScanCounter());
+                scans++;
             }
         }
-        else if(!grid.getCell(curButton).isScanned()) { // Not bloon button
-            GameLogic.scan(grid.getCell(curButton));
+        // Not bloon cell
+        else if(!grid.getCell(curButton).isMine() && !grid.getCell(curButton).isScanned()) {
             grid.getCell(curButton).setScanned(true);
-            button.setText("" + GameLogic.getScansUsed());
+            GameLogic.scan(grid.getCell(curButton));
+            button.setText("" + grid.getCell(curButton).getScanCounter());
+            scans++;
         }
         showTextCount();
+        /*
+        if(bloonsFound == savedData.get(2)) {
+
+        }
+         */
+
     }
 
     private void lockButtonSizes() {
@@ -135,13 +149,26 @@ public class Game extends AppCompatActivity {
         }
     }
 
+    private void updateScanCount() {
+        int index = 0;
+        for(Button[] buttonArr: buttons) {
+            for(Button b: buttonArr) {
+                if(grid.getCell(index).isScanned()) {
+                    GameLogic.scan(grid.getCell(index));
+                    b.setText("" + grid.getCell(index).getScanCounter());
+                    index++;
+                }
+
+            }
+        }
+    }
     private void showTextCount()
     {
         TextView bloons = findViewById(R.id.bloonCount);
         bloons.setText("Bloons found: " + bloonsFound + "/" + savedData.get(2));
 
         TextView scans2 = findViewById(R.id.scanCount);
-        scans2.setText("Scans used: " + scans);
+        scans2.setText("# of Scans used: " + scans);
 
     }
 }

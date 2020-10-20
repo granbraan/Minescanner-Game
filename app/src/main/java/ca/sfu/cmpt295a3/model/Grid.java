@@ -31,4 +31,12 @@ public class Grid {
     {
         return grid.size();
     }
+
+    public void restartGrid() {
+        for(int i = 0; i < grid.size(); i++) {
+            grid.get(i).setReveal(false);
+            grid.get(i).setScanned(false);
+            grid.get(i).setMine(false);
+        }
+    }
 }
