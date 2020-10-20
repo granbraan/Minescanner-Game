@@ -1,9 +1,12 @@
 package ca.sfu.cmpt295a3.UI;
 
 import android.annotation.SuppressLint;
+import android.app.ActivityManager;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -12,10 +15,14 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.List;
+
+import ca.sfu.cmpt295a3.MainActivity;
 import ca.sfu.cmpt295a3.R;
 import ca.sfu.cmpt295a3.model.Data;
 
 public class Options extends AppCompatActivity{
+    private MediaPlayer myPlayer;
     private SeekBar boardSizeSeek;
     private SeekBar numberOfBloons;
     private SharedPreferences sharedPref;
@@ -31,6 +38,7 @@ public class Options extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.options_menu);
+        myPlayer = MainActivity.getPlayer();
 
         sharedPref = getSharedPreferences("SaveFile", MODE_PRIVATE);
         sharedEditor = sharedPref.edit();
@@ -47,7 +55,12 @@ public class Options extends AppCompatActivity{
                 Log.i("Options - Reset Button", "Reset Stats Button Clicked");
                 sharedEditor.remove("gamesPlayed");
                 sharedEditor.remove("highScore");
-                sharedEditor.commit();
+                sharedEditor.apply();
+
+                String totalGames = "Games Played: " + 0;
+                String playerHigh = "High Score: " + 0;
+                ((TextView)findViewById(R.id.optionsGamesPlayedText)).setText(totalGames);
+                ((TextView)findViewById(R.id.optionsHighScoreText)).setText(playerHigh);
             }
         });
     }
@@ -66,7 +79,7 @@ public class Options extends AppCompatActivity{
                 0 = 4x6
                 1 = 5x10
                 2 = 6x15
-            Number of Mines
+            Number of Bloons
                 0 =  6
                 1 = 10
                 2 = 15
@@ -76,7 +89,7 @@ public class Options extends AppCompatActivity{
         numberOfBloons.setProgress(numOfBloons);
 
         setBoardText();
-        setMineText();
+        setBloonText();
         String totalGames = "Games Played: " + gamesPlayed;
         String playerHigh = "High Score: " + highScore;
         ((TextView)findViewById(R.id.optionsGamesPlayedText)).setText(totalGames);
@@ -100,7 +113,7 @@ public class Options extends AppCompatActivity{
         numberOfBloons.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener(){
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b){
-                setMineText();
+                setBloonText();
             }
 
             @Override
@@ -146,10 +159,10 @@ public class Options extends AppCompatActivity{
         }
 
         sharedEditor.putInt("boardSize", boardSizeSeek.getProgress());
-        sharedEditor.commit();
+        sharedEditor.apply();
     }
 
-    private void setMineText(){
+    private void setBloonText(){
         int curr = numberOfBloons.getProgress();
         TextView boardText = findViewById(R.id.optionsNumberOfBloonsText);
         String message = "Number of Bloons: ";
@@ -181,13 +194,35 @@ public class Options extends AppCompatActivity{
                 boardText.setText(message);
                 break;
         }
-        sharedEditor.putInt("numOfBloons", numberOfBloons.getProgress());
-        sharedEditor.commit();
+        sharedEditor.putInt("numOfBloons", 0);
+        sharedEditor.apply();
     }
 
     @Override
     public void onBackPressed(){
         finish();
+    }
+
+    @Override
+    protected void onPause() {
+        Context context = getApplicationContext();
+        ActivityManager am = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+        List<ActivityManager.RunningTaskInfo> taskInfo = am.getRunningTasks(1);
+        if (!taskInfo.isEmpty()) {
+            ComponentName topActivity = taskInfo.get(0).topActivity;
+            if (!topActivity.getPackageName().equals(context.getPackageName())) {
+                if(myPlayer != null){
+                    myPlayer.pause();
+                }
+            }
+        }
+        super.onPause();
+    }
+
+    @Override
+    protected void onResume() {
+        myPlayer.start();
+        super.onResume();
     }
 }
 

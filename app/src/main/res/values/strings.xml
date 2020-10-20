@@ -14,6 +14,9 @@
     <string name="menuHelpButton">Help</string>
     <string name="menuTitleText">Find the Bloons</string>
     <string name="menuImageDesc">Menu Screen Dart Monkey</string>
+    <string name="menu_start_icon">Menu Start Icon</string>
+    <string name="menu_option_icon">Menu Option Icon</string>
+    <string name="menu_help_icon">Menu Help Icon</string>
 
     <!-- Option Strings -->
     <string name="optionsBoardSizeText">Board Size</string>
@@ -27,5 +30,14 @@
     <string name="helpTitle">Instructions</string>
     <string name="helpRedBloonDesc">Picture of Red Bloon</string>
     <string name="helpCredits">Credits</string>
+    <string name="picture_of_bloon">Picture of Bloon</string>
+
+    <!-- Victory Strings -->
+    <string name="victoryTitle">Congratulations!</string>
+    <string name="victoryText">You helped the Monkeys find all the Bloons!</string>
+    <string name="victoryButton">Return to Menu</string>
+    <string name="victoryLeftImage">Dart Monkey Facing Right</string>
+    <string name="victoryRightImage">Dart Monkey Facing Left</string>
+    <string name="victoryScoreCount">Finished in X Scans</string>
 
 </resources>

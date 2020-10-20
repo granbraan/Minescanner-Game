@@ -1,45 +1,60 @@
 package ca.sfu.cmpt295a3.UI;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.app.ActivityManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.text.Html;
-import android.text.method.LinkMovementMethod;
-import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
-
-import androidx.appcompat.app.AppCompatActivity;
+import android.widget.Toast;
 
 import java.util.List;
 
 import ca.sfu.cmpt295a3.MainActivity;
 import ca.sfu.cmpt295a3.R;
+import ca.sfu.cmpt295a3.model.GameLogic;
 
-public class HelpScreen extends AppCompatActivity {
+public class VictoryScreen extends AppCompatActivity {
     private MediaPlayer myPlayer;
     public static Intent makeLaunchIntent(Context c){
-        return new Intent(c,HelpScreen.class);
+        return new Intent(c,VictoryScreen.class);
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState){
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.help_screen);
+        setContentView(R.layout.victory_screen);
         myPlayer = MainActivity.getPlayer();
 
-        setUpHyperlinks();
+        setUpText();
+        setUpButton();
     }
 
-    private void setUpHyperlinks(){
-        TextView textView =(TextView)findViewById(R.id.helpCreditText);
-        textView.setClickable(true);
-        textView.setMovementMethod(LinkMovementMethod.getInstance());
-        String text = "Course Website – <a href='https://opencoursehub.cs.sfu.ca/jackt/grav-cms/cmpt276-2/home'>Open Course Hub</a>\tImage & Music Credits – <a href='https://ninjakiwi.com/'>Ninja Kiwi</a>\n";
-        textView.setText(Html.fromHtml(text, Html.FROM_HTML_MODE_COMPACT));
+    private void setUpText(){
+        TextView myText = findViewById(R.id.victorySeekCount);
+        String text = "Finished in ";
+        text += GameLogic.getScansUsed();
+        text += " Scans!";
+
+        myText.setText(text);
+    }
+
+    private void setUpButton(){
+        Button myButton = findViewById(R.id.victoryButton);
+        myButton.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View view) {
+                Intent i = MainMenu.makeLaunchIntent(VictoryScreen.this);
+                startActivityForResult(i, 1);
+                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+            }
+        });
     }
 
     @Override
