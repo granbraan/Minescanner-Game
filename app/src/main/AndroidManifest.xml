@@ -27,29 +27,23 @@
         <activity
             android:name=".UI.MainMenu"
             android:configChanges="keyboard|orientation|keyboardHidden|screenSize"
-            android:screenOrientation="landscape"></activity>
             android:screenOrientation="landscape">
-
         </activity>
         <activity
             android:name=".UI.Options"
             android:configChanges="keyboard|orientation|keyboardHidden|screenSize"
-            android:screenOrientation="landscape"></activity>
-        <activity
-            android:name=".UI.HelpScreen"
             android:screenOrientation="landscape">
-
         </activity>
         <activity
             android:name=".UI.HelpScreen"
             android:configChanges="keyboard|orientation|keyboardHidden|screenSize"
-            android:screenOrientation="landscape"></activity>
+            android:screenOrientation="landscape">
+        </activity>
         <activity android:name=".UI.VictoryScreen"
             android:configChanges="keyboard|orientation|keyboardHidden|screenSize"
-            android:screenOrientation="landscape"></activity>
             android:screenOrientation="landscape">
-
         </activity>
+
     </application>
 
 </manifest>

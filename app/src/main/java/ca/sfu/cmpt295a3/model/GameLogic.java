@@ -3,25 +3,7 @@ package ca.sfu.cmpt295a3.model;
 import java.util.Random;
 
 public class GameLogic {
-    private static int minesRevealed;
-    private static int scansUsed;
     static Grid grid = Grid.getInstance();
-
-    public static int getMinesRevealed() {
-        return minesRevealed;
-    }
-
-    public static void setMinesRevealed(int minesRevealed) {
-        GameLogic.minesRevealed = minesRevealed;
-    }
-
-    public static int getScansUsed() {
-        return scansUsed;
-    }
-
-    public static void setScansUsed(int scansUsed) {
-        GameLogic.scansUsed = scansUsed;
-    }
 
     public static void createGame(int col, int row, int mines) {
         for (int i = 0; i < col; i++) {

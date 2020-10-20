@@ -1,6 +1,7 @@
 package ca.sfu.cmpt295a3.UI;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 
 import android.content.Context;
 import android.content.Intent;
@@ -30,7 +31,6 @@ public class Game extends AppCompatActivity {
     private final int NUM_COLS = savedData.get(1);
     private int scans;
     private int bloonsFound;
-    private int scanCount;
     Button buttons[][] =  new Button[NUM_ROWS][NUM_COLS];
 
 
@@ -42,10 +42,10 @@ public class Game extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
-
         populateButtons();
-        showTextCount();
         grid.restartGrid();
+        showTextCount();
+
         GameLogic.createGame(NUM_ROWS,NUM_COLS, savedData.get(2));
     }
 
@@ -117,19 +117,22 @@ public class Game extends AppCompatActivity {
                 scans++;
             }
         }
-        // Not bloon cell
+        // When click on cell that is not a Bloon
         else if(!grid.getCell(curButton).isMine() && !grid.getCell(curButton).isScanned()) {
             grid.getCell(curButton).setScanned(true);
             GameLogic.scan(grid.getCell(curButton));
             button.setText("" + grid.getCell(curButton).getScanCounter());
             scans++;
         }
+        //textview in cells
         showTextCount();
-        /*
-        if(bloonsFound == savedData.get(2)) {
 
+        if(bloonsFound == savedData.get(2)) {
+            savedData.add(4,scans);
+            FragmentManager manager = getSupportFragmentManager();
+            MessageFragment dialog = new MessageFragment();
+            dialog.show(manager, "MessageDialog");
         }
-         */
     }
 
     private void lockButtonSizes() {
@@ -168,5 +171,25 @@ public class Game extends AppCompatActivity {
         TextView scans2 = findViewById(R.id.scanCount);
         scans2.setText("# of Scans used: " + scans);
 
+        TextView gamesPlayed = findViewById(R.id.gamesPlayed);
+        gamesPlayed.setText("Games Played: " + savedData.get(3));
+
+
+    }
+
+    public int getScans() {
+        return scans;
+    }
+
+    public void setScans(int scans) {
+        this.scans = scans;
+    }
+
+    public int getBloonsFound() {
+        return bloonsFound;
+    }
+
+    public void setBloonsFound(int bloonsFound) {
+        this.bloonsFound = bloonsFound;
     }
 }
