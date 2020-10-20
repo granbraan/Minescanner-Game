@@ -130,7 +130,6 @@ public class Game extends AppCompatActivity {
 
         }
          */
-
     }
 
     private void lockButtonSizes() {
@@ -158,7 +157,6 @@ public class Game extends AppCompatActivity {
                     b.setText("" + grid.getCell(index).getScanCounter());
                     index++;
                 }
-
             }
         }
     }
