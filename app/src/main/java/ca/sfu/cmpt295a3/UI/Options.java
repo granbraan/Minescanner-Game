@@ -141,26 +141,18 @@ public class Options extends AppCompatActivity{
             case 0:
                 message += "4x6";
                 boardText.setText(message);
-                savedData.add(0,4); // rows
-                savedData.add(1,6); // cols
                 break;
             case 1:
                 message += "5x10";
-                savedData.add(0,5); // rows
-                savedData.add(1,10); // cols
                 boardText.setText(message);
                 break;
             case 2:
                 message += "6x15";
-                savedData.add(0,6); // rows
-                savedData.add(1,15); // cols
                 boardText.setText(message);
                 break;
             default:
                 boardSizeSeek.setProgress(0);
                 message += "4x6";
-                savedData.add(0,4); // rows
-                savedData.add(1,6); // cols
                 boardText.setText(message);
                 break;
         }

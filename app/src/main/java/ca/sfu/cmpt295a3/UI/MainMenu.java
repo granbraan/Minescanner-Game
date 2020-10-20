@@ -67,6 +67,37 @@ public class MainMenu extends AppCompatActivity{
                 savedData.add(3, curr);
                 sharedEditor.commit();
 
+                //Board Size
+                switch(sharedPref.getInt("boardSize",0)){
+                    case 1:
+                        savedData.add(0,5); // rows
+                        savedData.add(1,10); // cols
+                        break;
+                    case 2:
+                        savedData.add(0,6); // rows
+                        savedData.add(1,15); // cols
+                        break;
+                    default:
+                        savedData.add(0,4); // rows
+                        savedData.add(1,6); // cols
+                        break;
+                }
+                // Num of Bloons
+                switch(sharedPref.getInt("numOfBloons",0)){
+                    case 1:
+                        savedData.add(2,10);
+                        break;
+                    case 2:
+                        savedData.add(2,15);
+                        break;
+                    case 3:
+                        savedData.add(2,20);
+                        break;
+                    default:
+                        savedData.add(2,6);
+                        break;
+                }
+
                 Intent i = Game.makeLaunchIntent(MainMenu.this);
                 startActivityForResult(i, 1);
                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
