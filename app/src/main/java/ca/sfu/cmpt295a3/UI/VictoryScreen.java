@@ -73,10 +73,67 @@ public class VictoryScreen extends AppCompatActivity {
         int currScore = savedData.get(4);
         int currHigh = sharedPref.getInt("highScore", 0);
         if(currHigh <= 0){
-            sharedEditor.putInt("highScore", currScore);
+            putHighscore(currScore);
         }
         else if(currScore < currHigh){
-            sharedEditor.putInt("highScore", currScore);
+            putHighscore(currScore);
+        }
+        sharedEditor.apply();
+    }
+
+    private void putHighscore(int currScore){
+        int highScore = 0;
+        int size = sharedPref.getInt("boardSize", 0);
+        int bloons = sharedPref.getInt("numOfBloons", 0);
+        switch(size){
+            case 0:
+                switch(bloons){
+                    case 0:
+                        sharedEditor.putInt("highScore0", currScore);
+                        break;
+                    case 1:
+                        sharedEditor.putInt("highScore1", currScore);
+                        break;
+                    case 2:
+                        sharedEditor.putInt("highScore2", currScore);
+                        break;
+                    case 3:
+                        sharedEditor.putInt("highScore3", currScore);
+                        break;
+                }
+                break;
+            case 1:
+                switch(bloons){
+                    case 0:
+                        sharedEditor.putInt("highScore4", currScore);
+                        break;
+                    case 1:
+                        sharedEditor.putInt("highScore5", currScore);
+                        break;
+                    case 2:
+                        sharedEditor.putInt("highScore6", currScore);
+                        break;
+                    case 3:
+                        sharedEditor.putInt("highScore7", currScore);
+                        break;
+                }
+                break;
+            case 2:
+                switch(bloons){
+                    case 0:
+                        sharedEditor.putInt("highScore8", currScore);
+                        break;
+                    case 1:
+                        sharedEditor.putInt("highScore9", currScore);
+                        break;
+                    case 2:
+                        sharedEditor.putInt("highScore10", currScore);
+                        break;
+                    case 3:
+                        sharedEditor.putInt("highScore11", currScore);
+                        break;
+                }
+                break;
         }
         sharedEditor.apply();
     }

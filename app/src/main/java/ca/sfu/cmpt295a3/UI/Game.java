@@ -193,9 +193,9 @@ public class Game extends AppCompatActivity {
         scans2.setText("# of Scans used: " + scans);
 
         TextView gamesPlayed = findViewById(R.id.gamesPlayed);
-        gamesPlayed.setText("Games Played: " + savedData.get(3));
-
-
+        SharedPreferences sharedPref = getSharedPreferences("SaveFile", MODE_PRIVATE);
+        gamesPlayed.setText("Games Played: " + sharedPref.getInt("gamesPlayed", 0));
+        //gamesPlayed.setText("Games Played: " + savedData.get(3));
     }
 
     public int getScans() {

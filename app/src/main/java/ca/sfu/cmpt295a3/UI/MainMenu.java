@@ -42,11 +42,6 @@ public class MainMenu extends AppCompatActivity{
         sharedPref = getSharedPreferences("SaveFile", MODE_PRIVATE);
         sharedEditor = sharedPref.edit();
 
-        //used when player doesnt change options first
-        savedData.add(0,4); // default rows
-        savedData.add(1,6); // default cols
-        savedData.add(2,6); // default mines
-
         myPlayer = MainActivity.getPlayer();
 
         setUpButtons();
@@ -58,6 +53,9 @@ public class MainMenu extends AppCompatActivity{
             public void onClick(View view) {
                 //Swap to Game Screen
                 Log.i("Main Menu - Start Game", "Start Game Button Clicked");
+                for(int i = 0; i < savedData.size(); i++) {
+                    Log.i("TagData", String.valueOf(savedData.get(i)));
+                }
 
                 SharedPreferences sharedPref = getSharedPreferences("SaveFile", MODE_PRIVATE);
                 SharedPreferences.Editor sharedEditor = sharedPref.edit();
@@ -65,7 +63,7 @@ public class MainMenu extends AppCompatActivity{
                 curr += 1;
                 sharedEditor.putInt("gamesPlayed", curr);
                 savedData.add(3, curr);
-                sharedEditor.commit();
+                sharedEditor.apply();
 
                 //Board Size
                 switch(sharedPref.getInt("boardSize",0)){
