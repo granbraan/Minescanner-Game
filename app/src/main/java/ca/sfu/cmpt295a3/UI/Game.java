@@ -108,12 +108,12 @@ public class Game extends AppCompatActivity {
             if(!grid.getCell(curButton).isReveal()) {
                 bloonsFound++;
                 grid.getCell(curButton).setReveal(true);
-                grid.getCell(curButton).setScanned(true);
             }
             //Clicks on shown mine to scan
-            else if(grid.getCell(curButton).isReveal() && grid.getCell(curButton).isScanned()) {
+            else if(grid.getCell(curButton).isReveal() && !grid.getCell(curButton).isScanned()) {
                 GameLogic.scan(grid.getCell(curButton));
                 button.setText("" + grid.getCell(curButton).getScanCounter());
+                grid.getCell(curButton).setScanned(true);
                 scans++;
             }
         }
@@ -124,6 +124,8 @@ public class Game extends AppCompatActivity {
             button.setText("" + grid.getCell(curButton).getScanCounter());
             scans++;
         }
+        //board refresher
+        updateScanCount();
         //textview in cells
         showTextCount();
 
@@ -155,11 +157,11 @@ public class Game extends AppCompatActivity {
         int index = 0;
         for(Button[] buttonArr: buttons) {
             for(Button b: buttonArr) {
+                GameLogic.updateScan();
                 if(grid.getCell(index).isScanned()) {
-                    GameLogic.scan(grid.getCell(index));
                     b.setText("" + grid.getCell(index).getScanCounter());
-                    index++;
                 }
+                index++;
             }
         }
     }

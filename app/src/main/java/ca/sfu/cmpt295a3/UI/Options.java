@@ -87,6 +87,9 @@ public class Options extends AppCompatActivity{
         */
         boardSizeSeek.setProgress(boardSize);
         numberOfBloons.setProgress(numOfBloons);
+        for(int i = 0; i < savedData.size(); i++) {
+            Log.i("TagData", String.valueOf(savedData.get(i)));
+        }
 
         setBoardText();
         setBloonText();
