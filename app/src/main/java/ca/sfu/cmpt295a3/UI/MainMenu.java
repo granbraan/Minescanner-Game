@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.MediaPlayer;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -16,8 +17,13 @@ import java.util.List;
 
 import ca.sfu.cmpt295a3.MainActivity;
 import ca.sfu.cmpt295a3.R;
+import ca.sfu.cmpt295a3.model.Data;
 
 public class MainMenu extends AppCompatActivity{
+    private SharedPreferences sharedPref;
+    private SharedPreferences.Editor sharedEditor;
+    private Data savedData = Data.getInstance();
+
     private MediaPlayer myPlayer;
 
     public static Intent makeLaunchIntent(Context c){
@@ -28,6 +34,15 @@ public class MainMenu extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_menu);
+
+        sharedPref = getSharedPreferences("SaveFile", MODE_PRIVATE);
+        sharedEditor = sharedPref.edit();
+
+        //used when player doesnt change options first
+        savedData.add(0,4); // default rows
+        savedData.add(1,6); // default cols
+        savedData.add(2,6); // default mines
+
         myPlayer = MainActivity.getPlayer();
 
         setUpButtons();
@@ -45,8 +60,11 @@ public class MainMenu extends AppCompatActivity{
                 int curr = sharedPref.getInt("gamesPlayed", 0);
                 curr += 1;
                 sharedEditor.putInt("gamesPlayed", curr);
-                sharedEditor.apply();
+                savedData.add(3, curr);
+                sharedEditor.commit();
 
+                Intent i = Game.makeLaunchIntent(MainMenu.this);
+                startActivityForResult(i, 1);
                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
             }
         });

@@ -6,15 +6,23 @@ public class Cell {
     private boolean isMine;
     private boolean isReveal;
     private boolean isScanned;
+    private int scanCounter;
 
-    public Cell(int row, int col, boolean isMine, boolean isReveal, boolean isScanned) {
+    public Cell(int row, int col, boolean isMine, boolean isReveal, boolean isScanned, int scanCounter) {
         this.row = row;
         this.col = col;
         this.isMine = isMine;
         this.isReveal = isReveal;
         this.isScanned = isScanned;
+        this.scanCounter = scanCounter;
+    }
+    public int getScanCounter() {
+        return scanCounter;
     }
 
+    public void setScanCounter(int scanCounter) {
+        this.scanCounter = scanCounter;
+    }
     public int getRow() {
         return row;
     }

@@ -39,5 +39,8 @@
     <string name="victoryLeftImage">Dart Monkey Facing Right</string>
     <string name="victoryRightImage">Dart Monkey Facing Left</string>
     <string name="victoryScoreCount">Finished in X Scans</string>
+    <string name="games_played">Games Played:</string>
+    <string name="bloons_found">Bloons Found:</string>
+    <string name="scans_used">Scans used:</string>
 
 </resources>

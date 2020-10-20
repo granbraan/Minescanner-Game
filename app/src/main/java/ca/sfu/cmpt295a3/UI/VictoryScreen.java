@@ -17,10 +17,12 @@ import java.util.List;
 
 import ca.sfu.cmpt295a3.MainActivity;
 import ca.sfu.cmpt295a3.R;
+import ca.sfu.cmpt295a3.model.Data;
 import ca.sfu.cmpt295a3.model.GameLogic;
 
 public class VictoryScreen extends AppCompatActivity {
     private MediaPlayer myPlayer;
+    private static Data savedData = Data.getInstance();
     public static Intent makeLaunchIntent(Context c){
         return new Intent(c,VictoryScreen.class);
     }
@@ -37,8 +39,7 @@ public class VictoryScreen extends AppCompatActivity {
 
     private void setUpText(){
         TextView myText = findViewById(R.id.victorySeekCount);
-        String text = "Finished in ";
-        text += GameLogic.getScansUsed();
+        String text = "Finished in " + savedData.get(4);
         text += " Scans!";
 
         myText.setText(text);
