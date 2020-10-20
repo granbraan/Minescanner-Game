@@ -3,6 +3,8 @@ package ca.sfu.cmpt295a3.UI;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 
+import android.app.ActivityManager;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -10,6 +12,7 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -19,18 +22,27 @@ import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.List;
+
+import ca.sfu.cmpt295a3.MainActivity;
 import ca.sfu.cmpt295a3.R;
 import ca.sfu.cmpt295a3.model.Data;
 import ca.sfu.cmpt295a3.model.GameLogic;
 import ca.sfu.cmpt295a3.model.Grid;
 
+/**
+ * Game Screen where the user is playing the game
+ * Has grid of buttons to press
+ */
 public class Game extends AppCompatActivity {
+    private MediaPlayer myPlayer;
     private static Data savedData = Data.getInstance();
     private static Grid grid = Grid.getInstance();
     private final int NUM_ROWS = savedData.get(0);
     private final int NUM_COLS = savedData.get(1);
     private int scans;
     private int bloonsFound;
+    private MediaPlayer popSound, scanSound;
     Button buttons[][] =  new Button[NUM_ROWS][NUM_COLS];
 
 
@@ -42,6 +54,10 @@ public class Game extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
+        myPlayer = MainActivity.getPlayer();
+
+        popSound = MediaPlayer.create(getApplicationContext(), R.raw.bloon_pop);
+        scanSound = MediaPlayer.create(getApplicationContext(), R.raw.bloon_scan);
         populateButtons();
         grid.restartGrid();
         showTextCount();
@@ -106,11 +122,13 @@ public class Game extends AppCompatActivity {
 
             //updates bloon count
             if(!grid.getCell(curButton).isReveal()) {
+                popSound.start();
                 bloonsFound++;
                 grid.getCell(curButton).setReveal(true);
             }
             //Clicks on shown mine to scan
             else if(grid.getCell(curButton).isReveal() && !grid.getCell(curButton).isScanned()) {
+                scanSound.start();
                 GameLogic.scan(grid.getCell(curButton));
                 button.setText("" + grid.getCell(curButton).getScanCounter());
                 grid.getCell(curButton).setScanned(true);
@@ -119,6 +137,7 @@ public class Game extends AppCompatActivity {
         }
         // When click on cell that is not a Bloon
         else if(!grid.getCell(curButton).isMine() && !grid.getCell(curButton).isScanned()) {
+            scanSound.start();
             grid.getCell(curButton).setScanned(true);
             GameLogic.scan(grid.getCell(curButton));
             button.setText("" + grid.getCell(curButton).getScanCounter());
@@ -193,5 +212,27 @@ public class Game extends AppCompatActivity {
 
     public void setBloonsFound(int bloonsFound) {
         this.bloonsFound = bloonsFound;
+    }
+
+    @Override
+    protected void onPause() {
+        Context context = getApplicationContext();
+        ActivityManager am = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+        List<ActivityManager.RunningTaskInfo> taskInfo = am.getRunningTasks(1);
+        if (!taskInfo.isEmpty()) {
+            ComponentName topActivity = taskInfo.get(0).topActivity;
+            if (!topActivity.getPackageName().equals(context.getPackageName())) {
+                if(myPlayer != null){
+                    myPlayer.pause();
+                }
+            }
+        }
+        super.onPause();
+    }
+
+    @Override
+    protected void onResume() {
+        myPlayer.start();
+        super.onResume();
     }
 }

@@ -16,6 +16,9 @@ import androidx.appcompat.app.AppCompatDialogFragment;
 
 import ca.sfu.cmpt295a3.R;
 
+/**
+ * Message Fragment used to display victory screen for the user
+ */
 public class MessageFragment extends AppCompatDialogFragment {
     public static Intent makeLaunchIntent(Context c){
         return new Intent(c,MessageFragment.class);

@@ -2,7 +2,9 @@ package ca.sfu.cmpt295a3.model;
 
 import java.util.ArrayList;
 
-//Class to pass in SharedPreferences Data
+/**
+ * Data class holding information to pass to and from SharedPref
+ */
 public class Data {
     ArrayList<Integer> data = new ArrayList<>();
 

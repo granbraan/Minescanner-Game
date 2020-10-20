@@ -21,6 +21,10 @@ import ca.sfu.cmpt295a3.MainActivity;
 import ca.sfu.cmpt295a3.R;
 import ca.sfu.cmpt295a3.model.Data;
 
+/**
+ * Options Menu
+ * Allows user to clear highscore, games played, and set game properties such as number of bloons and size of the game board
+ */
 public class Options extends AppCompatActivity{
     private MediaPlayer myPlayer;
     private SeekBar boardSizeSeek;

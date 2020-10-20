@@ -19,6 +19,10 @@ import ca.sfu.cmpt295a3.MainActivity;
 import ca.sfu.cmpt295a3.R;
 import ca.sfu.cmpt295a3.model.Data;
 
+/**
+ * Main Menu allowing user to go to either
+ * Game, Options, or Help
+ */
 public class MainMenu extends AppCompatActivity{
     private SharedPreferences sharedPref;
     private SharedPreferences.Editor sharedEditor;

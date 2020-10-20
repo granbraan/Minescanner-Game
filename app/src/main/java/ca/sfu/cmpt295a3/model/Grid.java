@@ -2,7 +2,9 @@ package ca.sfu.cmpt295a3.model;
 
 import java.util.ArrayList;
 
-// Game grid which is an arraylist of Cells
+/**
+ * Grid holding details of the cells whether they are bloons or not
+ */
 public class Grid {
     static ArrayList<Cell> grid = new ArrayList<>();
 

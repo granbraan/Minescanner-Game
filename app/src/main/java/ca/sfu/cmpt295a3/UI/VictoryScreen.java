@@ -6,6 +6,7 @@ import android.app.ActivityManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
@@ -20,8 +21,14 @@ import ca.sfu.cmpt295a3.R;
 import ca.sfu.cmpt295a3.model.Data;
 import ca.sfu.cmpt295a3.model.GameLogic;
 
+/**
+ * Victory Screen congratulating the user on winning as well as displaying their score
+ */
 public class VictoryScreen extends AppCompatActivity {
     private MediaPlayer myPlayer;
+    private SharedPreferences sharedPref;
+    private SharedPreferences.Editor sharedEditor;
+
     private static Data savedData = Data.getInstance();
     public static Intent makeLaunchIntent(Context c){
         return new Intent(c,VictoryScreen.class);
@@ -35,6 +42,7 @@ public class VictoryScreen extends AppCompatActivity {
 
         setUpText();
         setUpButton();
+        setHighscore();
     }
 
     private void setUpText(){
@@ -56,6 +64,21 @@ public class VictoryScreen extends AppCompatActivity {
                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
             }
         });
+    }
+
+    private void setHighscore(){
+        sharedPref = getSharedPreferences("SaveFile", MODE_PRIVATE);
+        sharedEditor = sharedPref.edit();
+
+        int currScore = savedData.get(4);
+        int currHigh = sharedPref.getInt("highScore", 0);
+        if(currHigh <= 0){
+            sharedEditor.putInt("highScore", currScore);
+        }
+        else if(currScore < currHigh){
+            sharedEditor.putInt("highScore", currScore);
+        }
+        sharedEditor.apply();
     }
 
     @Override
