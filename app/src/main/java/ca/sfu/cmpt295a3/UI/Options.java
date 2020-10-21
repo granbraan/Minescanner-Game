@@ -21,6 +21,10 @@ import ca.sfu.cmpt295a3.MainActivity;
 import ca.sfu.cmpt295a3.R;
 import ca.sfu.cmpt295a3.model.Data;
 
+/**
+ * Options Menu
+ * Allows user to clear highscore, games played, and set game properties such as number of bloons and size of the game board
+ */
 public class Options extends AppCompatActivity{
     private MediaPlayer myPlayer;
     private SeekBar boardSizeSeek;
@@ -54,13 +58,22 @@ public class Options extends AppCompatActivity{
                 //Swap to Game Screen
                 Log.i("Options - Reset Button", "Reset Stats Button Clicked");
                 sharedEditor.remove("gamesPlayed");
-                sharedEditor.remove("highScore");
+                sharedEditor.remove("highScore0");
+                sharedEditor.remove("highScore1");
+                sharedEditor.remove("highScore2");
+                sharedEditor.remove("highScore3");
+                sharedEditor.remove("highScore4");
+                sharedEditor.remove("highScore5");
+                sharedEditor.remove("highScore6");
+                sharedEditor.remove("highScore7");
+                sharedEditor.remove("highScore8");
+                sharedEditor.remove("highScore9");
+                sharedEditor.remove("highScore10");
+                sharedEditor.remove("highScore11");
                 sharedEditor.apply();
-
                 String totalGames = "Games Played: " + 0;
-                String playerHigh = "High Score: " + 0;
                 ((TextView)findViewById(R.id.optionsGamesPlayedText)).setText(totalGames);
-                ((TextView)findViewById(R.id.optionsHighScoreText)).setText(playerHigh);
+                setHighscore();
             }
         });
     }
@@ -69,7 +82,6 @@ public class Options extends AppCompatActivity{
         int boardSize = sharedPref.getInt("boardSize", 0);
         int numOfBloons = sharedPref.getInt("numOfBloons", 0);
         int gamesPlayed = sharedPref.getInt("gamesPlayed", 0);
-        int highScore = sharedPref.getInt("highScore", 0);
 
         boardSizeSeek = findViewById(R.id.optionsBoardSizeSeek);
         numberOfBloons = findViewById(R.id.optionsNumberOfBloonsSeek);
@@ -91,14 +103,15 @@ public class Options extends AppCompatActivity{
         setBoardText();
         setBloonText();
         String totalGames = "Games Played: " + gamesPlayed;
-        String playerHigh = "High Score: " + highScore;
         ((TextView)findViewById(R.id.optionsGamesPlayedText)).setText(totalGames);
-        ((TextView)findViewById(R.id.optionsHighScoreText)).setText(playerHigh);
+
+        setHighscore();
 
         boardSizeSeek.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener(){
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b){
                 setBoardText();
+                setHighscore();
             }
 
             @Override
@@ -114,6 +127,7 @@ public class Options extends AppCompatActivity{
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b){
                 setBloonText();
+                setHighscore();
             }
 
             @Override
@@ -133,27 +147,27 @@ public class Options extends AppCompatActivity{
         switch(curr){
             case 0:
                 message += "4x6";
-                boardText.setText(message);
-                savedData.add(0,4); // rows
-                savedData.add(1,6); // cols
-                break;
-            case 1:
-                message += "5x10";
                 savedData.add(0,5); // rows
                 savedData.add(1,10); // cols
                 boardText.setText(message);
                 break;
-            case 2:
-                message += "6x15";
+            case 1:
+                message += "5x10";
                 savedData.add(0,6); // rows
                 savedData.add(1,15); // cols
                 boardText.setText(message);
                 break;
-            default:
-                boardSizeSeek.setProgress(0);
-                message += "4x6";
+            case 2:
+                message += "6x15";
                 savedData.add(0,4); // rows
                 savedData.add(1,6); // cols
+                boardText.setText(message);
+                break;
+            default:
+                savedData.add(0,5); // rows
+                savedData.add(1,10); // cols
+                boardSizeSeek.setProgress(0);
+                message += "4x6";
                 boardText.setText(message);
                 break;
         }
@@ -168,34 +182,89 @@ public class Options extends AppCompatActivity{
         String message = "Number of Bloons: ";
         switch(curr){
             case 0:
+                savedData.add(2,10);
                 message += "6";
-                savedData.add(2,6);
                 boardText.setText(message);
                 break;
             case 1:
+                savedData.add(2,15);
                 message += "10";
-                savedData.add(2,10);
                 boardText.setText(message);
                 break;
             case 2:
                 message += "15";
-                savedData.add(2,15);
                 boardText.setText(message);
                 break;
             case 3:
-                message += "20";
                 savedData.add(2,20);
+                message += "20";
                 boardText.setText(message);
                 break;
             default:
+                savedData.add(2,6);
                 numberOfBloons.setProgress(0);
                 message += "6";
-                savedData.add(2,6);
                 boardText.setText(message);
                 break;
         }
-        sharedEditor.putInt("numOfBloons", 0);
+        sharedEditor.putInt("numOfBloons", curr);
         sharedEditor.apply();
+    }
+
+    private void setHighscore(){
+        int highScore = 0;
+        switch(boardSizeSeek.getProgress()){
+            case 0:
+                switch(numberOfBloons.getProgress()){
+                    case 0:
+                        highScore = sharedPref.getInt("highScore0", 0);
+                        break;
+                    case 1:
+                        highScore = sharedPref.getInt("highScore1", 0);
+                        break;
+                    case 2:
+                        highScore = sharedPref.getInt("highScore2", 0);
+                        break;
+                    case 3:
+                        highScore = sharedPref.getInt("highScore3", 0);
+                        break;
+                }
+                break;
+            case 1:
+                switch(numberOfBloons.getProgress()) {
+                    case 0:
+                        highScore = sharedPref.getInt("highScore4", 0);
+                        break;
+                    case 1:
+                        highScore = sharedPref.getInt("highScore5", 0);
+                        break;
+                    case 2:
+                        highScore = sharedPref.getInt("highScore6", 0);
+                        break;
+                    case 3:
+                        highScore = sharedPref.getInt("highScore7", 0);
+                        break;
+                }
+                break;
+            case 2:
+                switch(numberOfBloons.getProgress()) {
+                    case 0:
+                        highScore = sharedPref.getInt("highScore8", 0);
+                        break;
+                    case 1:
+                        highScore = sharedPref.getInt("highScore9", 0);
+                        break;
+                    case 2:
+                        highScore = sharedPref.getInt("highScore10", 0);
+                        break;
+                    case 3:
+                        highScore = sharedPref.getInt("highScore11", 0);
+                        break;
+                }
+                break;
+        }
+        String playerHigh = "High Score: " + highScore;
+        ((TextView)findViewById(R.id.optionsHighScoreText)).setText(playerHigh);
     }
 
     @Override

@@ -2,6 +2,9 @@ package ca.sfu.cmpt295a3.model;
 
 import java.util.Random;
 
+/**
+ * Logic of the game, handles creations, scans
+ */
 public class GameLogic {
     static Grid grid = Grid.getInstance();
 

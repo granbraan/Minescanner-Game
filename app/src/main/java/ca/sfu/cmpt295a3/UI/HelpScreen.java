@@ -5,10 +5,13 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.Html;
+import android.text.SpannableStringBuilder;
 import android.text.method.LinkMovementMethod;
-import android.util.Log;
+import android.text.style.ClickableSpan;
+import android.text.style.URLSpan;
 import android.view.View;
 import android.widget.TextView;
 
@@ -19,6 +22,9 @@ import java.util.List;
 import ca.sfu.cmpt295a3.MainActivity;
 import ca.sfu.cmpt295a3.R;
 
+/**
+ * Help Screen displaying instructions on how to play the game as well as the credits
+ */
 public class HelpScreen extends AppCompatActivity {
     private MediaPlayer myPlayer;
     public static Intent makeLaunchIntent(Context c){
@@ -31,15 +37,39 @@ public class HelpScreen extends AppCompatActivity {
         setContentView(R.layout.help_screen);
         myPlayer = MainActivity.getPlayer();
 
-        setUpHyperlinks();
+        String text = "Course Website – <a href='https://opencoursehub.cs.sfu.ca/jackt/grav-cms/cmpt276-2/home'>Open Course Hub</a>\tImage & Music Credits – <a href='https://ninjakiwi.com/'>Ninja Kiwi</a>\n";
+        setTextViewHTML((TextView)findViewById(R.id.helpCreditText), text);
     }
 
-    private void setUpHyperlinks(){
-        TextView textView =(TextView)findViewById(R.id.helpCreditText);
-        textView.setClickable(true);
-        textView.setMovementMethod(LinkMovementMethod.getInstance());
-        String text = "Course Website – <a href='https://opencoursehub.cs.sfu.ca/jackt/grav-cms/cmpt276-2/home'>Open Course Hub</a>\tImage & Music Credits – <a href='https://ninjakiwi.com/'>Ninja Kiwi</a>\n";
-        textView.setText(Html.fromHtml(text, Html.FROM_HTML_MODE_COMPACT));
+    //https://stackoverflow.com/questions/12418279/android-textview-with-clickable-links-how-to-capture-clicks/19989677#19989677
+    protected void makeLinkClickable(SpannableStringBuilder strBuilder, final URLSpan span)
+    {
+        int start = strBuilder.getSpanStart(span);
+        int end = strBuilder.getSpanEnd(span);
+        int flags = strBuilder.getSpanFlags(span);
+        ClickableSpan clickable = new ClickableSpan() {
+            public void onClick(View view) {
+                // Do something with span.getURL() to handle the link click...
+                Uri link = Uri.parse(span.getURL());
+                Intent i = new Intent(Intent.ACTION_VIEW, link);
+                startActivity(i);
+                myPlayer.pause();
+            }
+        };
+        strBuilder.setSpan(clickable, start, end, flags);
+        strBuilder.removeSpan(span);
+    }
+
+    protected void setTextViewHTML(TextView text, String html)
+    {
+        CharSequence sequence = Html.fromHtml(html);
+        SpannableStringBuilder strBuilder = new SpannableStringBuilder(sequence);
+        URLSpan[] urls = strBuilder.getSpans(0, sequence.length(), URLSpan.class);
+        for(URLSpan span : urls) {
+            makeLinkClickable(strBuilder, span);
+        }
+        text.setText(strBuilder);
+        text.setMovementMethod(LinkMovementMethod.getInstance());
     }
 
     @Override

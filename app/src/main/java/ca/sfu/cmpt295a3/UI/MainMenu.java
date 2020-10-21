@@ -19,6 +19,10 @@ import ca.sfu.cmpt295a3.MainActivity;
 import ca.sfu.cmpt295a3.R;
 import ca.sfu.cmpt295a3.model.Data;
 
+/**
+ * Main Menu allowing user to go to either
+ * Game, Options, or Help
+ */
 public class MainMenu extends AppCompatActivity{
     private SharedPreferences sharedPref;
     private SharedPreferences.Editor sharedEditor;
@@ -38,11 +42,6 @@ public class MainMenu extends AppCompatActivity{
         sharedPref = getSharedPreferences("SaveFile", MODE_PRIVATE);
         sharedEditor = sharedPref.edit();
 
-        //used when player doesnt change options first
-        savedData.add(0,4); // default rows
-        savedData.add(1,6); // default cols
-        savedData.add(2,6); // default mines
-
         myPlayer = MainActivity.getPlayer();
 
         setUpButtons();
@@ -54,6 +53,9 @@ public class MainMenu extends AppCompatActivity{
             public void onClick(View view) {
                 //Swap to Game Screen
                 Log.i("Main Menu - Start Game", "Start Game Button Clicked");
+                for(int i = 0; i < savedData.size(); i++) {
+                    Log.i("TagData", String.valueOf(savedData.get(i)));
+                }
 
                 SharedPreferences sharedPref = getSharedPreferences("SaveFile", MODE_PRIVATE);
                 SharedPreferences.Editor sharedEditor = sharedPref.edit();
@@ -61,7 +63,38 @@ public class MainMenu extends AppCompatActivity{
                 curr += 1;
                 sharedEditor.putInt("gamesPlayed", curr);
                 savedData.add(3, curr);
-                sharedEditor.commit();
+                sharedEditor.apply();
+
+                //Board Size
+                switch(sharedPref.getInt("boardSize",0)){
+                    case 1:
+                        savedData.add(0,5); // rows
+                        savedData.add(1,10); // cols
+                        break;
+                    case 2:
+                        savedData.add(0,6); // rows
+                        savedData.add(1,15); // cols
+                        break;
+                    default:
+                        savedData.add(0,4); // rows
+                        savedData.add(1,6); // cols
+                        break;
+                }
+                // Num of Bloons
+                switch(sharedPref.getInt("numOfBloons",0)){
+                    case 1:
+                        savedData.add(2,10);
+                        break;
+                    case 2:
+                        savedData.add(2,15);
+                        break;
+                    case 3:
+                        savedData.add(2,20);
+                        break;
+                    default:
+                        savedData.add(2,6);
+                        break;
+                }
 
                 Intent i = Game.makeLaunchIntent(MainMenu.this);
                 startActivityForResult(i, 1);

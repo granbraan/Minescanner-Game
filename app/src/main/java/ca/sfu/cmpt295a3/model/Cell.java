@@ -1,5 +1,9 @@
 package ca.sfu.cmpt295a3.model;
 
+/**
+ * Contains the information of a specific cell,
+ * Where the cell is, if it's a bloon, revealed yet, scanned yet, and the number of scans (In the row/column)
+ */
 public class Cell {
     private int row;
     private int col;
