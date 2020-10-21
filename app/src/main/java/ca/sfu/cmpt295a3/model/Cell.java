@@ -23,6 +23,7 @@ public class Cell {
     public void setScanCounter(int scanCounter) {
         this.scanCounter = scanCounter;
     }
+
     public int getRow() {
         return row;
     }

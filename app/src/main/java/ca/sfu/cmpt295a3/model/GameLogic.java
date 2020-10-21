@@ -36,7 +36,7 @@ public class GameLogic {
             }
         cell.setScanCounter(scannedMines);
     }
-    //decrease scan count when mine is found
+    //refresh scan count for every scanned cell
     public static void  updateScan() {
         for(int i = 0; i < grid.size(); i++) {
             if(grid.getCell(i).isScanned()) {
