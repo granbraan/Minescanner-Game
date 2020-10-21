@@ -53,16 +53,11 @@ public class MainMenu extends AppCompatActivity{
             public void onClick(View view) {
                 //Swap to Game Screen
                 Log.i("Main Menu - Start Game", "Start Game Button Clicked");
-                for(int i = 0; i < savedData.size(); i++) {
-                    Log.i("TagData", String.valueOf(savedData.get(i)));
-                }
-
                 SharedPreferences sharedPref = getSharedPreferences("SaveFile", MODE_PRIVATE);
                 SharedPreferences.Editor sharedEditor = sharedPref.edit();
                 int curr = sharedPref.getInt("gamesPlayed", 0);
                 curr += 1;
                 sharedEditor.putInt("gamesPlayed", curr);
-                savedData.add(3, curr);
                 sharedEditor.apply();
 
                 //Board Size
@@ -95,7 +90,7 @@ public class MainMenu extends AppCompatActivity{
                         savedData.add(2,6);
                         break;
                 }
-
+                savedData.add(3, curr);
                 Intent i = Game.makeLaunchIntent(MainMenu.this);
                 startActivityForResult(i, 1);
                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
